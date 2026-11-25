@@ -1,0 +1,259 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+  min-height: 100vh;
+  padding: 16px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+header h1 {
+  font-size: 1.6rem;
+  color: #38bdf8;
+}
+
+.subtitle {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ویدیو */
+.video-section {
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1e293b;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+/* دکمه‌ها */
+.controls {
+  display: flex;
+  gap: 12px;
+}
+
+.controls button {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: #38bdf8;
+  color: #0f172a;
+  transition: opacity 0.2s;
+}
+
+.controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+#stop-btn,
+#stop-capture-btn {
+  background: #f87171;
+}
+
+/* پنل اطلاعات */
+.info-panel {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.info-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.info-panel td {
+  padding: 8px 4px;
+  border-bottom: 1px solid #334155;
+}
+
+.info-panel tr:last-child td {
+  border-bottom: none;
+}
+
+.info-panel .label {
+  color: #94a3b8;
+  width: 55%;
+}
+
+.info-panel td:last-child {
+  font-weight: 600;
+  color: #38bdf8;
+  direction: ltr;
+  text-align: left;
+}
+
+/* پیش‌نمایش */
+.preview-section h3 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #94a3b8;
+}
+
+.preview-box {
+  background: #1e293b;
+  border-radius: 12px;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+#preview-canvas {
+  max-width: 100%;
+  display: none;
+  border-radius: 8px;
+}
+
+#preview-empty {
+  color: #64748b;
+  font-size: 0.85rem;
+}
+/* ============================================
+   Recognition Engine Status Panel
+   ============================================ */
+
+.engine-status {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-label {
+  color: #94a3b8;
+  font-size: 0.9rem;
+}
+
+.status-value {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.status-value.loading { color: #fbbf24; }
+.status-value.ready   { color: #4ade80; }
+.status-value.error   { color: #f87171; }
+/* ============================================
+   Recognition Result Panel
+   ============================================ */
+
+.recognition-result {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 12px 16px;
+  border: 1px solid #334155;
+}
+
+.recognition-result.detected {
+  border-color: #4ade80;
+  background: #14532d; /* سبز تیره */
+}
+
+.result-header {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #e2e8f0;
+  border-bottom: 1px solid #334155;
+  padding-bottom: 4px;
+}
+
+.result-content p {
+  margin: 4px 0;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+}
+
+.result-content span {
+  color: #38bdf8;
+  font-weight: bold;
+}
+
+/* ============================================
+   Interactive Map Section (Phase 6)
+   ============================================ */
+
+.map-section {
+  background: #1e293b;
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+
+.map-section h3 {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+  color: #94a3b8;
+}
+
+#map {
+  height: 400px;
+  width: 100%;
+  border-radius: 8px;
+  background: #0f172a;
+  /* جلوگیری از سرریز و به‌هم‌ریختگی با تم تیره */
+  z-index: 1; 
+}
+
+/* شخصی‌سازی ظاهر Leaflet با تم تیره */
+.leaflet-container {
+  background: #0f172a !important;
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1e293b;
+  color: #e2e8f0;
+  border-radius: 8px;
+}
+
+.leaflet-popup-tip {
+  background: #1e293b;
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px;
+  font-size: 0.85rem;
+}
+
+.leaflet-popup-content b {
+  color: #38bdf8;
+}

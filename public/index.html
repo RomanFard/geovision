@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GeoVision - Frame Capture Engine</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>GeoVision</h1>
+    <p class="subtitle">Frame Capture Engine</p>
+  </header>
+
+  <main>
+    <!-- نمایش زنده دوربین -->
+    <section class="video-section">
+      <video id="video" autoplay playsinline muted></video>
+    </section>
+
+    <!-- کنترل‌های دوربین -->
+    <section class="controls">
+      <button id="start-btn">Start Camera</button>
+      <button id="stop-btn" disabled>Stop Camera</button>
+    </section>
+
+    <!-- کنترل‌های Capture -->
+    <section class="controls capture-controls">
+      <button id="start-capture-btn" disabled>Start Capture</button>
+      <button id="stop-capture-btn" disabled>Stop Capture</button>
+    </section>
+
+    <!-- کنترل‌های GPS (مستقل از دوربین) -->
+    <section class="controls gps-controls">
+      <button id="start-gps-btn">Start GPS</button>
+      <button id="stop-gps-btn" disabled>Stop GPS</button>
+    </section>
+
+    <!-- وضعیت Recognition Engine -->
+    <section class="engine-status">
+      <div class="status-row">
+        <span class="status-label">Recognition Engine</span>
+        <span id="engine-status" class="status-value loading">Loading...</span>
+      </div>
+    </section>
+
+    <!-- وضعیت GPS / Location -->
+    <section class="engine-status gps-status-panel">
+      <div class="status-row">
+        <span class="status-label">GPS Status</span>
+        <span id="gps-status" class="status-value">Inactive</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Latitude</span>
+        <span id="gps-latitude" class="status-value">—</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Longitude</span>
+        <span id="gps-longitude" class="status-value">—</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Accuracy (meters)</span>
+        <span id="gps-accuracy" class="status-value">—</span>
+      </div>
+      <div class="status-row">
+        <span class="status-label">Last Location Update</span>
+        <span id="gps-last-update" class="status-value">—</span>
+      </div>
+    </section>
+
+    <!-- نقشه تعاملی (Phase 6) -->
+    <section class="map-section">
+      <h3>Interactive Map</h3>
+      <div id="map" style="height: 400px; width: 100%; border-radius: 12px; margin-top: 10px;"></div>
+    </section>
+
+    <!-- جدول تبلیغات نزدیک (Spatial Context) -->
+    <section class="info-panel nearby-ads-panel" id="nearby-ads-panel" style="display: none;">
+      <h3>Nearby Ads (Spatial Context)</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Ad ID</th>
+            <th>Brand</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody id="nearby-ads-body">
+          <!-- ردیف‌ها توسط app.js رندر می‌شوند -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- نتیجه تشخیص -->
+    <section class="recognition-result" id="recognition-result" style="display: none;">
+      <h3>Ad Recognition</h3>
+      <div class="result-row"><span>Status:</span> <span id="res-status">—</span></div>
+      <div class="result-row"><span>Ad:</span> <span id="res-ad">—</span></div>
+      <div class="result-row"><span>Match Score:</span> <span id="res-score">—</span></div>
+      <div class="result-row"><span>Processing Time:</span> <span id="res-time">—</span></div>
+      
+      <!-- 🟢 ردیف جدید: فاصله تا تبلیغ شناسایی‌شده -->
+      <div class="result-row"><span>Distance to Ad:</span> <span id="res-distance">—</span></div>
+
+      <!-- معیارهای ارزیابی (Evaluation Metrics) -->
+      <div class="result-row"><span>Ad ID:</span> <span id="res-id">—</span></div>
+      <div class="result-row"><span>Total Good Matches:</span> <span id="res-total">—</span></div>
+      <div class="result-row"><span>RANSAC Inliers:</span> <span id="res-inliers">—</span></div>
+      <div class="result-row"><span>Inlier Ratio:</span> <span id="res-ratio">—</span></div>
+    </section>
+
+    <!-- پنل اطلاعات -->
+    <section class="info-panel">
+      <table>
+        <tbody>
+          <tr>
+            <td class="label">Camera Status</td>
+            <td id="camera-status">Inactive</td>
+          </tr>
+          <tr>
+            <td class="label">Capture Status</td>
+            <td id="capture-status">Stopped</td>
+          </tr>
+          <tr>
+            <td class="label">Capture Interval</td>
+            <td id="capture-interval">1000 ms</td>
+          </tr>
+          <tr>
+            <td class="label">Frames Captured</td>
+            <td id="frames-captured">0</td>
+          </tr>
+          <tr>
+            <td class="label">Last Capture</td>
+            <td id="last-capture">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- پیش‌نمایش آخرین فریم -->
+    <section class="preview-section">
+      <h3>Last Frame Preview</h3>
+      <div class="preview-box">
+        <canvas id="preview-canvas"></canvas>
+        <p id="preview-empty">No frame captured yet</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Canvas مخفی برای پردازش (خارج از دید کاربر) -->
+  <canvas id="capture-canvas" style="display:none;"></canvas>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script 
+    async 
+    src="opencv/opencv.js" 
+    type="text/javascript"
+    onload="console.log('✅ opencv.js downloaded (but may not be compiled yet)')"
+    onerror="console.error('❌ opencv.js failed to download!')">
+  </script>
+  <script src="src/recognition/orb.js"></script>
+  <script src="src/recognition/matcher.js"></script>
+  <script src="src/recognition/recognition-engine.js"></script>
+  <script src="src/spatial/distance.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+[
+  {
+    "id": "ad_001",
+    "name": "Fizzora - Ice Cold Refresh",
+    "file": "ad_001.jpg",
+    "brand": "Fizzora",
+    "category": "beverage",
+    "location": {
+      "latitude": 35.70000,
+      "longitude": 51.40000,
+      "altitude": 1200
+    },
+    "geofence": {
+      "radius_meters": 50
+    }
+  },
+  {
+    "id": "ad_002",
+    "name": "Sonova",
+    "file": "ad_002.jpg",
+    "brand": "Sonova",
+    "category": "technology",
+    "location": {
+      "latitude": 35.70030,
+      "longitude": 51.40000,
+      "altitude": 1200
+    },
+    "geofence": {
+      "radius_meters": 50
+    }
+  },
+  {
+    "id": "ad_003",
+    "name": "Veloria - Drive The Future",
+    "file": "ad_003.jpg",
+    "brand": "Veloria",
+    "category": "automotive",
+    "location": {
+      "latitude": 35.70090,
+      "longitude": 51.40000,
+      "altitude": 1200
+    },
+    "geofence": {
+      "radius_meters": 50
+    }
+  },
+  {
+    "id": "ad_004",
+    "name": "Burger & Co - Stacked To Perfection",
+    "file": "ad_004.jpg",
+    "brand": "Burger & Co",
+    "category": "food",
+    "location": {
+      "latitude": 35.70000,
+      "longitude": 51.40060,
+      "altitude": 1200
+    },
+    "geofence": {
+      "radius_meters": 50
+    }
+  },
+  {
+    "id": "ad_005",
+    "name": "Urban Thread",
+    "file": "ad_005.jpg",
+    "brand": "Urban Thread",
+    "category": "fashion",
+    "location": {
+      "latitude": 35.70000,
+      "longitude": 51.40180,
+      "altitude": 1200
+    },
+    "geofence": {
+      "radius_meters": 50
+    }
+  },
+  {
+    "id": "ad_006",
+    "name": "Skywander",
+    "file": "ad_006.jpg",
+    "brand": "Skywander",
+    "category": "travel",
+    "location": {
+      "latitude": 35.70180,
+      "longitude": 51.40180,
+      "altitude": 1200
+    },
+    "geofence": {
+      "radius_meters": 50
+    }
+  },
+  {
+    "id": "ad_007",
+    "name": "Lumina Cosmetics",
+    "file": "ad_007.jpg",
+    "brand": "Lumina",
+    "category": "beauty",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_008",
+    "name": "Nova Cola Classic",
+    "file": "ad_008.jpg",
+    "brand": "Nova",
+    "category": "beverage",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_009",
+    "name": "Zenith Monitor",
+    "file": "ad_009.jpg",
+    "brand": "Zenith",
+    "category": "technology",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_010",
+    "name": "Apex Backpack",
+    "file": "ad_010.jpg",
+    "brand": "Apex",
+    "category": "fashion",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_011",
+    "name": "Lumina Perfume",
+    "file": "ad_011.jpg",
+    "brand": "Lumina",
+    "category": "beauty",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_012",
+    "name": "Pulse Zero Sugar",
+    "file": "ad_012.jpg",
+    "brand": "Pulse",
+    "category": "beverage",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_013",
+    "name": "Orbit Earbuds",
+    "file": "ad_013.jpg",
+    "brand": "Orbit",
+    "category": "technology",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_014",
+    "name": "Terra Green Tea",
+    "file": "ad_014.jpg",
+    "brand": "Terra",
+    "category": "beverage",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_015",
+    "name": "Nova Energy",
+    "file": "ad_015.jpg",
+    "brand": "Nova",
+    "category": "beverage",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_016",
+    "name": "Zenith Tablet",
+    "file": "ad_016.jpg",
+    "brand": "Zenith",
+    "category": "technology",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_017",
+    "name": "Apex Jacket",
+    "file": "ad_017.jpg",
+    "brand": "Apex",
+    "category": "fashion",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_018",
+    "name": "Lumina Serum",
+    "file": "ad_018.jpg",
+    "brand": "Lumina",
+    "category": "beauty",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_019",
+    "name": "Orbit Camera",
+    "file": "ad_019.jpg",
+    "brand": "Orbit",
+    "category": "technology",
+    "location": null,
+    "geofence": null
+  },
+  {
+    "id": "ad_020",
+    "name": "Terra Snacks",
+    "file": "ad_020.jpg",
+    "brand": "Terra",
+    "category": "food",
+    "location": null,
+    "geofence": null
+  }
+]

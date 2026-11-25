@@ -1,0 +1,10 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.vercel/
+ngrok.yml
+*.bak
+*.bak2
+*.bak3
+*.bak4
