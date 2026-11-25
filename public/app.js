@@ -419,9 +419,9 @@ async function onGpsSuccess(position) {
     // دریافت تبلیغات نزدیک از API
     try {
 
-        const response = await fetch(
-          /api/ads/nearby
-        );
+const response = await fetch(
+  '/api/ads/nearby'
+);
 
         if (!response.ok) {
             throw new Error(`API error: ${response.status}`);
