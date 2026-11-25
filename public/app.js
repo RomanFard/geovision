@@ -165,11 +165,28 @@ function captureFrame() {
       document.getElementById('res-inliers').textContent = result.ransacInliers || 0;
       document.getElementById('res-ratio').textContent = result.inlierRatio || 0;
 
-      if (result.detected) {
-        resultPanel.classList.add('detected');
-        resStatus.textContent = '✅ Ad Detected';
-        resAd.textContent = result.ad.name;
-        resScore.textContent = result.matchScore;
+if (result.detected) {
+    const matchedAd = referenceAds.find(ad => ad.id === result.adId);
+const adCard = document.getElementById('recognized-ad-card');
+const adImage = document.getElementById('recognized-ad-image');
+
+if (matchedAd) {
+    adCard.style.display = 'flex';
+
+    adImage.src = matchedAd.image_url.startsWith('http')
+        ? matchedAd.image_url
+        : `/${matchedAd.image_url.replace(/^\/+/, '')}`;
+
+    document.getElementById('recognized-ad-name').textContent = matchedAd.name || '—';
+    document.getElementById('recognized-ad-brand').textContent = matchedAd.brand || '—';
+    document.getElementById('recognized-ad-category').textContent = matchedAd.category || '—';
+} else {
+    adCard.style.display = 'none';
+}
+    resultPanel.classList.add('detected');
+    resStatus.textContent = '✅ Ad Detected';
+    resAd.textContent = matchedAd ? matchedAd.name : result.ad.name;
+    resScore.textContent = result.matchScore;
 
         // 🟢 محاسبه فاصله تا تبلیغ (Phase 4.4)
         const resDistanceEl = document.getElementById('res-distance');
@@ -186,6 +203,7 @@ function captureFrame() {
         }
       } else {
         resultPanel.classList.remove('detected');
+        document.getElementById('recognized-ad-card').style.display = 'none';
         resStatus.textContent = `❌ Not Found (Best Score: ${result.matchScore})`;
         resAd.textContent = '—';
         resScore.textContent = result.matchScore || '0.000';
@@ -420,14 +438,14 @@ async function onGpsSuccess(position) {
     try {
 
 const response = await fetch(
-  '/api/ads/nearby'
+  `/api/ads/nearby?lat=${latitude}&lng=${longitude}&radius=1000`
 );
 
         if (!response.ok) {
             throw new Error(`API error: ${response.status}`);
         }
 
-        const apiAds = await response.json();
+        referenceAds = apiAds;
 
         // تبدیل داده‌ها برای جدول Nearby Ads
         const nearby = apiAds.map(ad => ({

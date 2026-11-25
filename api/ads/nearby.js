@@ -22,11 +22,15 @@ export default async function handler(req, res) {
   const searchRadius = radius ? parseFloat(radius) : 1000;
 
   const query = `
-    SELECT
-      id,
-      name,
-      image_url,
-      geofence_radius_meters,
+SELECT
+  id,
+  name,
+  brand,
+  category,
+  image_url,
+  geofence_radius_meters,
+  extensions.ST_Y(location::extensions.geometry) AS latitude,
+  extensions.ST_X(location::extensions.geometry) AS longitude,
       extensions.ST_Distance(
         location,
         extensions.ST_SetSRID(
